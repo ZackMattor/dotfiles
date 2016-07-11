@@ -5,7 +5,7 @@ set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin('.vim/plugins')
+call vundle#begin('~/.vim/plugins')
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'kchmck/vim-coffee-script'
