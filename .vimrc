@@ -42,16 +42,14 @@ set softtabstop=2
 set tabstop=2
 
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|tmp\|bower_components'
-" let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_show_hidden = 1
-
-au BufNewFile,BufRead *.jbuilder set ft=ruby
 
 augroup AutoCmds
   autocmd!
   autocmd FileType qf nnoremap <buffer> <CR> <CR>
   autocmd QuickFixCmdPost *grep* cwindow
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+  autocmd BufNewFile,BufRead *.jbuilder set ft=ruby
 augroup END
 
 nnoremap <CR> :write<CR>
