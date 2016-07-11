@@ -47,10 +47,14 @@ let g:ctrlp_show_hidden = 1
 
 au BufNewFile,BufRead *.jbuilder set ft=ruby
 
+augroup AutoCmds
+  autocmd!
+  autocmd FileType qf nnoremap <buffer> <CR> <CR>
+  autocmd QuickFixCmdPost *grep* cwindow
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+augroup END
+
 nnoremap <CR> :write<CR>
-autocmd FileType qf nnoremap <buffer> <CR> <CR>
-autocmd QuickFixCmdPost *grep* cwindow
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 nnoremap <Tab> >>_
 nnoremap <S-Tab> <<_
