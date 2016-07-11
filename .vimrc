@@ -1,5 +1,5 @@
 "
-" /home/zmattor/.vimrc - Crriten's vimrc
+" /home/zmattor/.vimrc - Zack's vimrc
 "
 set nocompatible
 filetype off
