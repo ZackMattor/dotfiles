@@ -47,14 +47,9 @@ let g:ctrlp_show_hidden = 1
 
 autocmd QuickFixCmdPost *grep* cwindow
 
-" have Vim load indentation rules and plugins according to the detected filetype.
-if has("autocmd")
-  filetype plugin indent off
-endif
-
 au BufNewFile,BufRead *.jbuilder set ft=ruby
 
-nmap <CR> :write<CR>
+nnoremap <CR> :write<CR>
 autocmd FileType qf nnoremap <buffer> <CR> <CR>
 
 nnoremap <Tab> >>_
@@ -70,7 +65,7 @@ if has('mouse_sgr')
   set ttymouse=sgr
 endif
 
-if $TERM == "screen" || $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal" || 1
+if $TERM == "screen" || $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
   set t_Co=256
 endif
 
