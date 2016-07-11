@@ -45,12 +45,12 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|tmp\|bower_components'
 " let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 let g:ctrlp_show_hidden = 1
 
-autocmd QuickFixCmdPost *grep* cwindow
-
 au BufNewFile,BufRead *.jbuilder set ft=ruby
 
 nnoremap <CR> :write<CR>
 autocmd FileType qf nnoremap <buffer> <CR> <CR>
+autocmd QuickFixCmdPost *grep* cwindow
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 nnoremap <Tab> >>_
 nnoremap <S-Tab> <<_
@@ -58,15 +58,8 @@ inoremap <S-Tab> <C-D>
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 
-" Close if NERDTree is last buffer
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
 if has('mouse_sgr')
   set ttymouse=sgr
-endif
-
-if $TERM == "screen" || $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
-  set t_Co=256
 endif
 
 " Load baller theme
