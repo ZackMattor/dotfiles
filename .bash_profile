@@ -15,10 +15,7 @@ alias ngrok-ember="ngrok http -subdomain=zack-ember 4200"
 alias ngrok-nginx="ngrok http -subdomain=zack-nginx 3001"
 
 # ssh
-alias ec2='ssh -i ~/.ssh/ZackMac.pem ubuntu@ec2-54-226-121-215.compute-1.amazonaws.com'
 alias irc='ssh zmattor@irc.zmattor.me -t "tmux a"'
-alias adored-nginx='ssh root@45.55.228.108'
-alias farel='ssh antiphates.feralhosting.com'
 
 # git
 alias ga='git add . --all'
@@ -28,7 +25,6 @@ alias gc='git commit'
 alias rs='rails server'
 alias rc='rails console'
 alias es='ember server --proxy http://localhost:3000'
-#alias nw='/Applications/nwjs.app/Contents/MacOS/nwjs .'
 
 alias http_server='python -m SimpleHTTPServer 8000'
 
