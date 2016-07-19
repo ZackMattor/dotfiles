@@ -15,7 +15,7 @@ alias ngrok-ember="ngrok http -subdomain=zack-ember 4200"
 alias ngrok-nginx="ngrok http -subdomain=zack-nginx 3001"
 
 # ssh
-alias irc='ssh zmattor@irc.zmattor.me -t "tmux a"'
+alias irc='ssh zmattor@nginx.zmattor.me -t "tmux a"'
 
 # git
 alias ga='git add . --all'
