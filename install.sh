@@ -10,11 +10,11 @@ then
 
   # Bash
   rm -rf ~/.bash_profile
-  ln -s ${PWD}/bash/.bash_profile ~/.config/nvim
+  ln -s ${PWD}/bash/.bash_profile ~/.bash_profile
 
-  # Bash
+  # Tmux
   rm -rf ~/.tmux.conf
-  ln -s ${PWD}/tmux/.tmux.conf ~/.tmux.conf
+  ln -s ${PWD}/tmux/tmux.conf ~/.tmux.conf
 fi
 
 touch ~/.secrets
