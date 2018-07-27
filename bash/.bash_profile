@@ -1,5 +1,3 @@
-echo "Welcome to Zack's terminal 😎 "
-
 export CLICOLOR=1
 
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
@@ -8,11 +6,13 @@ PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -
 alias pgstart='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias tmux="TERM=screen-256color-bce tmux"
 alias redis="redis-server /usr/local/etc/redis.conf"
+alias vim="nvim"
 
 # NGROK
 alias ngrok-rails="ngrok http -subdomain=zack-rails 3000"
 alias ngrok-ember="ngrok http -subdomain=zack-ember 4200"
 alias ngrok-nginx="ngrok http -subdomain=zack-nginx 3001"
+alias ngrok-web="ngrok http -subdomain=zack-nginx 8080"
 
 # ssh
 alias irc='ssh zmattor@nginx.zmattor.me -t "tmux a"'
@@ -27,6 +27,8 @@ alias rc='rails console'
 alias es='ember server --proxy http://localhost:3000'
 
 alias http_server='python -m SimpleHTTPServer 8000'
+alias migrate='rails db:migrate && RAILS_ENV=test rails db:migrate'
+alias psql='docker exec -ti pg_local psql -U dev'
 
 # set paths
 export PATH="$HOME/.rbenv/shims:$PATH"
@@ -35,11 +37,11 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="/Users/zmattor/Library/Android/sdk/tools:$PATH"
 export PATH="/Users/zmattor/Library/Android/sdk/platform-tools:$PATH"
 
-
 # env variables
 export DISABLE_SPRING=1
 export ANDROID_HOME=/Users/zmattor/Library/Android/sdk
 export NVM_DIR="/Users/zmattor/.nvm"
+export EDITOR="vim"
 
 source ~/.secret
 

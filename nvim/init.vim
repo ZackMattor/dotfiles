@@ -1,27 +1,29 @@
 "
-" /home/zmattor/.vimrc - Zack's vimrc
+" Zack's vim config
 "
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin('~/.vim/plugins')
+call plug#begin('~/.local/share/nvim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'kien/ctrlp.vim'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'pangloss/vim-javascript'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
+Plug 'kchmck/vim-coffee-script'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'pangloss/vim-javascript'
+Plug 'posva/vim-vue'
+Plug 'kien/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-rails'
+Plug 'shime/vim-livedown'
 
-call vundle#end()
+call plug#end()
+
+set termguicolors
 filetype plugin indent on
 
 syntax on
 
-set autowrite
 set background=dark
 set backspace=2
 set expandtab
@@ -34,13 +36,13 @@ set listchars=trail:⋅
 set mouse=a
 set noswapfile
 set number
-set ruler
 set shiftwidth=2
-set showmatch!
+set showmatch
 set smartindent
 set softtabstop=2
 set tabstop=2
 
+" ctrlp options
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|tmp\|bower_components'
 let g:ctrlp_show_hidden = 1
 
@@ -64,5 +66,4 @@ if has('mouse_sgr')
   set ttymouse=sgr
 endif
 
-" Load baller theme
-source ~/.vim/colors/zenburn.vim
+colorscheme zenburn
