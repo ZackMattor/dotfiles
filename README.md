@@ -7,7 +7,7 @@ install.sh
 ---
 Installs dotfiles for Neovim, Bash, and Tmux
 
-Sane settings
+Sane MacOS settings
 ---
 ```
 defaults write -g InitialKeyRepeat -int 13 # normal minimum is 15 (225 ms)
