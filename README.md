@@ -3,9 +3,18 @@ dotfiles
 
 Just my dotfiles... nothing fancy
 
+ - tmux
+ - neovim
+
 install.sh
 ---
 Installs dotfiles for Neovim, Bash, and Tmux
+
+To install neovim `plug`
+```
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
 
 Sane MacOS settings
 ---
