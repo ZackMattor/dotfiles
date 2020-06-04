@@ -6,16 +6,18 @@ filetype off
 
 call plug#begin('~/.local/share/nvim/plugged')
 
+Plug 'hashivim/vim-terraform'
 Plug 'kchmck/vim-coffee-script'
+Plug 'kien/ctrlp.vim'
+Plug 'leafgarland/typescript-vim'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'pangloss/vim-javascript'
 Plug 'posva/vim-vue'
-Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-rails'
 Plug 'shime/vim-livedown'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
