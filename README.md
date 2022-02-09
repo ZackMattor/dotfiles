@@ -12,17 +12,10 @@ install.sh
 ---
 Installs dotfiles for Neovim, Bash, and Tmux
 
-To install neovim `plug`
-```
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-```
-
 System Settings
 ---
  - Change caps lock to control
  - Enable tracpad 3 finger drag
- - 
 
 Apps to Install
 ---
