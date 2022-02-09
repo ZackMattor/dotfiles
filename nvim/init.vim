@@ -18,8 +18,11 @@ Plug 'shime/vim-livedown'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
+
+let g:coc_global_extensions = ['coc-tsserver', 'coc-rls', 'coc-solargraph']
 
 set termguicolors
 filetype plugin indent on
