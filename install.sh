@@ -4,6 +4,8 @@ echo    # move to a new line
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
+  mkdir -p ~/.config
+  
   # Neovim
   rm -rf ~/.config/nvim
   ln -s ${PWD}/nvim ~/.config/nvim
