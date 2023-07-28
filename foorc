@@ -1,0 +1,64 @@
+# vim: filetype=bash
+
+alias vim="nvim"
+
+sshz_hosts() {
+  echo $(cat ~/.ssh/config* | grep 'Host ' | grep -v '*' | sed 's/^Host //' | fzf)
+}
+
+sshz() {
+  endpoint=$(sshz_hosts)
+  echo $endpoint
+  ssh $endpoint
+}
+
+sshz_install() {
+  if [ -f $1 ]; then
+    key=$1
+    endpoint=$(sshz_hosts)
+
+    echo $key
+    echo $endpoint
+
+    ssh-copy-id -i $key $endpoint
+  else
+    echo "Please specify a key file as your argument"
+    return
+  fi
+}
+
+sshz_install() {
+  if [ -n "$1" ] && [ -f $1 ]; then
+    key=$1
+    endpoint=$(sshz_hosts)
+
+    echo $key
+    echo $endpoint
+
+    ssh-copy-id -i $key $endpoint
+  else
+    echo "Please specify a key file as your argument"
+    return
+  fi
+}
+
+sshz_remove() {
+  if [ -n "$1" ] && [ -f $1 ]; then
+    key=$1
+    endpoint=$(sshz_hosts)
+
+    echo $key
+    echo $endpoint
+
+    KEY_ESCAPED=$(printf "$(cat $key)\n" | sed -e 's/[\/&]/\\&/g')
+    echo $ESCAPED_REPLACE
+
+    echo "BEFORE"
+    ssh $endpoint "cat .ssh/authorized_keys" | sed "s/$KEY_ESCAPED//g"
+    echo "HERE WE GO"
+    ssh $endpoint "cat .ssh/authorized_keys" | sed "s/$KEY_ESCAPED//g"
+  else
+    echo "Please specify a key file as your argument"
+    return
+  fi
+}

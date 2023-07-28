@@ -38,6 +38,8 @@ set ignorecase
 set incsearch
 set list
 set listchars=trail:⋅
+set modeline
+set modelines=1
 set mouse=a
 set noswapfile
 set number
