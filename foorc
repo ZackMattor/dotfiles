@@ -2,6 +2,20 @@
 
 alias vim="nvim"
 
+tm() {
+    # Get the current directory name
+    session_name=$(basename "$PWD")
+
+    # Check if a tmux session with the current directory name exists
+    if tmux has-session -t "$session_name" 2>/dev/null; then
+        # If it exists, attach to the session
+        tmux attach-session -t "$session_name"
+    else
+        # If it doesn't exist, create a new session with that name
+        tmux new-session -s "$session_name"
+    fi
+}
+
 sshz_hosts() {
   echo $(cat ~/.ssh/config* | grep 'Host ' | grep -v '*' | sed 's/^Host //' | fzf)
 }
