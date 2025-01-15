@@ -76,3 +76,43 @@ sshz_remove() {
     return
   fi
 }
+
+# Remote all branches that aren't main
+git_prune() {
+  # Ensure you are in a git repository
+  if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    echo "Error: This is not a Git repository."
+    return
+  fi
+
+  # Check if on the main branch
+  current_branch=$(git branch --show-current)
+  if [ "$current_branch" != "main" ]; then
+    echo "Switching to the main branch..."
+    git checkout main || { echo "Failed to switch to the main branch."; return; }
+  fi
+
+  # Fetch and prune remote-tracking branches
+  echo "Fetching and pruning local branches..."
+  git fetch --prune
+
+  # List all local branches except 'main'
+  branches_to_delete=$(git branch --list | grep -v "^\* main$" | grep -v "main$")
+
+  if [ -z "$branches_to_delete" ]; then
+    echo "No local branches to delete."
+    return
+  fi
+
+  # Confirm deletion
+  echo "The following local branches will be deleted:"
+  echo "$branches_to_delete"
+  echo -n "Are you sure? (y/N): "
+  read confirmation
+  if [[ "$confirmation" =~ ^[Yy]$ ]]; then
+    echo "$branches_to_delete" | xargs git branch -D
+    echo "Deleted the branches."
+  else
+    echo "Operation canceled."
+  fi
+}
