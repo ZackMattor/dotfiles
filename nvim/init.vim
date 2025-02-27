@@ -30,14 +30,14 @@ filetype plugin indent on
 syntax on
 
 set background=dark
-set backspace=2
+set backspace=indent,eol,start
 set expandtab
 set hidden
 set hlsearch
 set ignorecase
 set incsearch
 set list
-set listchars=trail:⋅
+set listchars=tab:\ \ ,trail:⋅
 set modeline
 set modelines=1
 set mouse=a
@@ -49,8 +49,14 @@ set smartindent
 set softtabstop=2
 set tabstop=2
 
+" Java-specific settings: use actual tabs instead of spaces
+autocmd FileType java setlocal tabstop=4 shiftwidth=4 noexpandtab
+
 " ctrlp options
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|tmp\|bower_components'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|log\|.terraform\|tmp$',
+  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
+  \ }
 let g:ctrlp_show_hidden = 1
 
 augroup AutoCmds
@@ -74,3 +80,4 @@ if has('mouse_sgr')
 endif
 
 colorscheme zenburn
+
