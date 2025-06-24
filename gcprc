@@ -1,0 +1,113 @@
+# Check if required tools (gcloud and fzf) are installed
+# Returns 0 if both tools are available, 1 otherwise
+check_gcp_prerequisites() {
+	if ! command -v gcloud &> /dev/null; then
+		echo "gcloud not found. Please install the Google Cloud SDK."
+		return 1
+	fi
+	if ! command -v fzf &> /dev/null; then
+		echo "fzf not found. Please install fzf."
+		return 1
+	fi
+	return 0
+}
+
+# Interactive project selection using fzf
+# Returns the selected project ID, or empty string if none selected
+project_selection() {
+	gcloud projects list --format="value(projectId)" | grep attg | fzf --prompt="Select GCP Project: "
+}
+
+# Interactive VM selection for a given project
+# Args: $1 - Project ID
+# Returns VM info in format "VM_NAME VM_ZONE", or empty string if none selected
+vm_selection() {
+	local project_id="$1"
+	gcloud compute instances list --project="$project_id" --format="table(name,zone)" | tail -n +2 | fzf --prompt="Select VM: "
+}
+
+# SSH into a GCP VM with optional port forwarding
+# Args: $1 - Port forwarding specification (optional, format: "local_port:remote_host:remote_port")
+gcp_ssh() {
+	local port_forward=""
+	
+	# Parse port forwarding argument
+	if [[ -n "$1" ]]; then
+		port_forward="-L $1"
+		echo "Port forwarding enabled: $1"
+	fi
+	
+	# Check prerequisites
+	if ! check_gcp_prerequisites; then
+		return 1
+	fi
+	
+	# Select project
+	local project_id
+	project_id=$(project_selection)
+	if [[ -z "$project_id" ]]; then
+		echo "No project selected. Exiting."
+		return 1
+	fi
+	
+	# Set active project
+	gcloud config set project "$project_id"
+	
+	# Select VM
+	local vm_info
+	vm_info=$(vm_selection "$project_id")
+	if [[ -z "$vm_info" ]]; then
+		echo "No VM selected. Exiting."
+		return 1
+	fi
+	
+	# Parse VM info
+	local vm_name vm_zone
+	vm_name=$(echo "$vm_info" | awk '{print $1}')
+	vm_zone=$(echo "$vm_info" | awk '{print $2}')
+	
+	# Connect to VM
+	echo "Connecting to $vm_name in $vm_zone..."
+	gcloud compute ssh "$vm_name" --zone="$vm_zone" -- "$port_forward"
+}
+
+# Start IAP tunnel for RDP access to a GCP VM
+# Args: $1 - Local port for RDP connection (optional, defaults to 3389)
+gcp_rdp() {
+	local local_port="${1:-3389}"
+	
+	# Check prerequisites
+	if ! check_gcp_prerequisites; then
+		return 1
+	fi
+	
+	# Select project
+	local project_id
+	project_id=$(project_selection)
+	if [[ -z "$project_id" ]]; then
+		echo "No project selected. Exiting."
+		return 1
+	fi
+	
+	# Set active project
+	gcloud config set project "$project_id"
+	
+	# Select VM
+	local vm_info
+	vm_info=$(vm_selection "$project_id")
+	if [[ -z "$vm_info" ]]; then
+		echo "No VM selected. Exiting."
+		return 1
+	fi
+	
+	# Parse VM info
+	local vm_name vm_zone
+	vm_name=$(echo "$vm_info" | awk '{print $1}')
+	vm_zone=$(echo "$vm_info" | awk '{print $2}')
+	
+	# Start IAP tunnel
+	echo "Starting IAP tunnel to $vm_name in $vm_zone on localhost:$local_port..."
+	gcloud compute start-iap-tunnel "$vm_name" 3389 \
+		--local-host-port="localhost:$local_port" \
+		--zone="$vm_zone"
+}
