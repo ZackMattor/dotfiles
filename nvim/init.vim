@@ -1,14 +1,11 @@
 "
 " Zack's vim config
 "
-set nocompatible
-filetype off
-
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'hashivim/vim-terraform'
 Plug 'kchmck/vim-coffee-script'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'pangloss/vim-javascript'
@@ -22,7 +19,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
-let g:coc_global_extensions = ['coc-tsserver', 'coc-rls', 'coc-solargraph']
+let g:coc_global_extensions = ['coc-tsserver', 'coc-rust-analyzer', 'coc-solargraph']
 
 set termguicolors
 filetype plugin indent on
@@ -55,7 +52,7 @@ autocmd FileType java setlocal tabstop=4 shiftwidth=4 noexpandtab
 " ctrlp options
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|\.yardoc\|node_modules\|log\|.terraform\|tmp$',
-  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
+  \ 'file': '\.so$\|\.dat$\|\.DS_Store$'
   \ }
 let g:ctrlp_show_hidden = 1
 
