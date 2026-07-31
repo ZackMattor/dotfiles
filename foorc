@@ -12,7 +12,7 @@ tm() {
 }
 
 sshz_hosts() {
-  grep -h 'Host ' ~/.ssh/config* | grep -v '*' | sed 's/^Host //' | fzf
+  grep -h 'Host ' ~/.ssh/config* | grep -vF '*' | sed 's/^Host //' | fzf
 }
 
 sshz() {
